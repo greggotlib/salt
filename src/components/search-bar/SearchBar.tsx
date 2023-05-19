@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react'
+import React, { memo, useState } from 'react'
 import {
   SearchInput,
   Wrapper,
@@ -24,7 +24,7 @@ const SearchBar = ({ handleFilterData, data }: SearchBarProps) => {
   const [withPii, setWithPii] = useState<boolean>(false)
   const debouncedSearchText = useDebounce(searchText, 300)
   const { searchBar } = dictionary
-  console.log('withPii', withPii)
+
   const filterData = () => {
     let filteredData: Data = data
 

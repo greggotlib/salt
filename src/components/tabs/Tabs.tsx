@@ -21,7 +21,7 @@ function BasicTabs() {
   const [data, setData] = useState<Data>(initialData)
   const [filteredData, setFilteredData] = useState<Data>(initialData)
   const { general } = dictionary
-  console.log(data)
+
   useEffect(() => {
     setData(fetchedData)
     setFilteredData(fetchedData)
