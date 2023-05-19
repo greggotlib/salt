@@ -23,5 +23,11 @@ export interface Fields {
 export type Response = Request
 
 export interface TableProps {
-  data: Request | Response
+  data: Request | Request
+  updateByPiiOrMasked: (
+    arg0: string,
+    arg1: string,
+    arg2: string,
+    arg3: boolean
+  ) => void
 }

@@ -1,6 +1,6 @@
 import Tabs from '@mui/material/Tabs'
 import fetchedData from 'api/data.json'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Container,
   Content,
@@ -11,18 +11,45 @@ import {
 import { SearchBar } from 'components/search-bar'
 import { Table } from 'components/table'
 import { Request, Response } from 'components/table/types'
+import { updateDataDynamically } from 'utils/helpers'
+import TabPanel from './tab-panel/TablPanel'
 
 function BasicTabs() {
   const [value, setValue] = useState(0)
-  const [data, setData] = useState<Request | Response>(fetchedData.request)
+  const [data, setData] = useState<Request | Response>({})
+  const [filteredData, setFilteredData] = useState<Request | Response>({})
+
+  useEffect(() => {
+    setData(fetchedData.request)
+    setFilteredData(fetchedData.request)
+  }, [])
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
     if (newValue === 0) {
       setData(fetchedData.request)
+      setFilteredData(fetchedData.request)
     } else {
       setData(fetchedData.response)
+      setFilteredData(fetchedData.response)
     }
+  }
+
+  const handleUpdateByPiiOrMasked = (
+    key: string,
+    fieldName: string,
+    propery: string,
+    value: boolean
+  ) => {
+    const updatedData = updateDataDynamically(
+      data,
+      key,
+      fieldName,
+      propery,
+      value
+    )
+    setData(updatedData)
+    setFilteredData(updatedData)
   }
 
   return (
@@ -41,9 +68,29 @@ function BasicTabs() {
       </TabsContainer>
       <Content>
         <SearchBarContainer>
-          <SearchBar />
+          <SearchBar
+            data={data}
+            handleFilterData={setFilteredData}
+          />
         </SearchBarContainer>
-        <Table data={data} />
+        <TabPanel
+          value={value}
+          index={0}
+        >
+          <Table
+            data={filteredData}
+            updateByPiiOrMasked={handleUpdateByPiiOrMasked}
+          />
+        </TabPanel>
+        <TabPanel
+          value={value}
+          index={1}
+        >
+          <Table
+            data={filteredData}
+            updateByPiiOrMasked={handleUpdateByPiiOrMasked}
+          />
+        </TabPanel>
       </Content>
     </Container>
   )

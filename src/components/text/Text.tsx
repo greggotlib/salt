@@ -4,8 +4,8 @@ import { Container, StyledText } from './Text.style'
 const Text = ({
   label,
   fontWeight,
-  color,
-  fontFamily,
+  color = '#3D3D3D',
+  fontFamily = 'Inter',
   transform = Transform.NONE,
   fontSize = FontSizes.SMALL,
 }: TextProps) => {

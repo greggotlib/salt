@@ -27,6 +27,4 @@ export const Content = styled.div`
   padding: 20px 23px 10px 20px;
 `
 
-export const SearchBarContainer = styled.div`
-  margin-block-end: 40px;
-`
+export const SearchBarContainer = styled.div``

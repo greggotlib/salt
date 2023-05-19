@@ -10,20 +10,32 @@ import {
   ResetFilters,
 } from './SearchBar.style'
 import useDebounce from 'hooks/useDebounce'
-import { handleDeepComparison } from 'utils/helpers'
+import { filterByTypeOrName, handleDeepComparison } from 'utils/helpers'
 import { SearchBarProps } from './types'
 import { dictionary } from 'utils/dictionary'
-import searchIcon from 'assets/icons/searchIcon.svg'
+import searchIcon from 'assets/icons/search-icon.svg'
 import { FontSizes } from 'components/text/types'
 import { Text } from 'components/text'
 import { CheckBox } from 'components/check-box'
+import { Request, Response } from 'components/table/types'
 
-const SearchBar = () => {
+const SearchBar = ({ handleFilterData, data }: SearchBarProps) => {
   const [searchText, setSearchText] = useState<string>('')
+  const [withPii, setWithPii] = useState<boolean>(false)
   const debouncedSearchText = useDebounce(searchText, 300)
   const { searchBar } = dictionary
 
-  useEffect(() => {}, [debouncedSearchText])
+  useEffect(() => {
+    let filteredData: Request | Response[] = data
+
+    if (!debouncedSearchText) {
+      handleFilterData(data)
+      return
+    }
+
+    filteredData = filterByTypeOrName(data, searchText, withPii)
+    handleFilterData(filteredData)
+  }, [debouncedSearchText])
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value)
@@ -40,7 +52,7 @@ const SearchBar = () => {
         <StyledSearchIcon src={searchIcon} />
       </SearchContainer>
       <PIIContainer>
-        <CheckBox />
+        <CheckBox handleClick={setWithPii} />
         <Text
           label={searchBar.pii}
           fontSize={FontSizes.MEDIUM}

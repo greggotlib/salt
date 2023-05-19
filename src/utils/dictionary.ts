@@ -5,4 +5,15 @@ export const dictionary = {
     applyLabel: 'Apply Filters',
     restetLabel: 'Reset Filters',
   },
+  table: {
+    urlParams: 'URL Parameters',
+    queryParams: 'Query Parameters',
+    headers: 'Headers',
+    body: 'Body',
+    PII: 'PII',
+    masked: 'Masked',
+    masking: 'Masking',
+    name: 'Name',
+    type: 'Type',
+  },
 }
