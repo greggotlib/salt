@@ -10,46 +10,46 @@ import {
 } from './Tabs.style'
 import { SearchBar } from 'components/search-bar'
 import { Table } from 'components/table'
-import { Request, Response } from 'components/table/types'
+import { Data } from 'components/table/types'
 import { updateDataDynamically } from 'utils/helpers'
 import TabPanel from './tab-panel/TablPanel'
+import { initialData } from './types'
+import { dictionary } from 'utils/dictionary'
 
 function BasicTabs() {
   const [value, setValue] = useState(0)
-  const [data, setData] = useState<Request | Response>({})
-  const [filteredData, setFilteredData] = useState<Request | Response>({})
-
+  const [data, setData] = useState<Data>(initialData)
+  const [filteredData, setFilteredData] = useState<Data>(initialData)
+  const { general } = dictionary
+  console.log(data)
   useEffect(() => {
-    setData(fetchedData.request)
-    setFilteredData(fetchedData.request)
+    setData(fetchedData)
+    setFilteredData(fetchedData)
   }, [])
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
-    if (newValue === 0) {
-      setData(fetchedData.request)
-      setFilteredData(fetchedData.request)
-    } else {
-      setData(fetchedData.response)
-      setFilteredData(fetchedData.response)
-    }
   }
 
   const handleUpdateByPiiOrMasked = (
-    key: string,
+    parentField: string,
     fieldName: string,
     propery: string,
-    value: boolean
+    newValue: boolean
   ) => {
+    const dataType = value === 0 ? data.request : data.response
+    const dataKey = value === 0 ? general.request : general.response
+
     const updatedData = updateDataDynamically(
-      data,
-      key,
+      dataType,
+      parentField,
       fieldName,
       propery,
-      value
+      newValue
     )
-    setData(updatedData)
-    setFilteredData(updatedData)
+    const temp = { ...data, [dataKey]: { ...updatedData } }
+    setData(temp)
+    setFilteredData(temp)
   }
 
   return (
@@ -62,8 +62,8 @@ function BasicTabs() {
           value={value}
           onChange={handleChange}
         >
-          <StyledTab label="Request" />
-          <StyledTab label="Response" />
+          <StyledTab label={general.request} />
+          <StyledTab label={general.response} />
         </Tabs>
       </TabsContainer>
       <Content>
@@ -78,7 +78,7 @@ function BasicTabs() {
           index={0}
         >
           <Table
-            data={filteredData}
+            data={filteredData.request}
             updateByPiiOrMasked={handleUpdateByPiiOrMasked}
           />
         </TabPanel>
@@ -87,7 +87,7 @@ function BasicTabs() {
           index={1}
         >
           <Table
-            data={filteredData}
+            data={filteredData.response}
             updateByPiiOrMasked={handleUpdateByPiiOrMasked}
           />
         </TabPanel>

@@ -59,6 +59,7 @@ export const ApplyFilters = styled.button`
   background: #7d3ce9;
   border-radius: 6px;
   border: none;
+  cursor: pointer;
 `
 
 export const ResetFilters = styled.button`
@@ -72,6 +73,7 @@ export const ResetFilters = styled.button`
   height: 35px;
   background: transparent;
   border: none;
+  cursor: pointer;
 `
 
 export const ButtonsContainer = styled.div`

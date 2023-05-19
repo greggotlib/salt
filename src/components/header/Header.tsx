@@ -18,13 +18,11 @@ const Header = () => {
         fontSize={FontSizes.LARGE}
         fontWeight="700"
         transform={Transform.UPPERCASE}
-        fontFamily="Inter"
       />
       <Text
         label={apiData.path}
         fontSize={FontSizes.LARGE}
         fontWeight="700"
-        fontFamily="Inter"
       />
     </Container>
   )

@@ -1,12 +1,8 @@
-import { useState } from 'react'
 import { Container, StyledCheckBox } from './CheckBout.style'
 import { CheckBoxProps } from './types'
 
-const Checkbox = ({ handleClick }: CheckBoxProps) => {
-  const [checked, setChecked] = useState(false)
-
+const Checkbox = ({ handleClick, checked }: CheckBoxProps) => {
   const handleCheckboxChange = () => {
-    setChecked(!checked)
     handleClick(!checked)
   }
 

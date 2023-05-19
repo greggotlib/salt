@@ -16,4 +16,8 @@ export const dictionary = {
     name: 'Name',
     type: 'Type',
   },
+  general: {
+    request: 'request',
+    response: 'response',
+  },
 }

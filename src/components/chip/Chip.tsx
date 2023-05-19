@@ -35,7 +35,6 @@ const Chip = ({
     >
       <ChipText
         label={label}
-        fontFamily="Inter"
         fontSize={FontSizes.MEDIUM}
         color={inverted ? backgroundColor : color}
       />

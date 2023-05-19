@@ -12,7 +12,6 @@ import { FontSizes } from 'components/text/types'
 import { dictionary } from 'utils/dictionary'
 
 const Table = ({ data, updateByPiiOrMasked }: TableProps) => {
-  console.log(data)
   const { table } = dictionary
   return (
     <TableContainer>

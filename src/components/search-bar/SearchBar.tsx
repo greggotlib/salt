@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import {
   SearchInput,
   Wrapper,
@@ -17,28 +17,40 @@ import searchIcon from 'assets/icons/search-icon.svg'
 import { FontSizes } from 'components/text/types'
 import { Text } from 'components/text'
 import { CheckBox } from 'components/check-box'
-import { Request, Response } from 'components/table/types'
+import { Data } from 'components/table/types'
 
 const SearchBar = ({ handleFilterData, data }: SearchBarProps) => {
   const [searchText, setSearchText] = useState<string>('')
   const [withPii, setWithPii] = useState<boolean>(false)
   const debouncedSearchText = useDebounce(searchText, 300)
   const { searchBar } = dictionary
-
-  useEffect(() => {
-    let filteredData: Request | Response[] = data
+  console.log('withPii', withPii)
+  const filterData = () => {
+    let filteredData: Data = data
 
     if (!debouncedSearchText) {
-      handleFilterData(data)
+      handleFilterData(filteredData)
       return
     }
 
     filteredData = filterByTypeOrName(data, searchText, withPii)
     handleFilterData(filteredData)
-  }, [debouncedSearchText])
+  }
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      filterData()
+    }
+  }
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value)
+  }
+
+  const clearFilters = () => {
+    setSearchText('')
+    setWithPii(false)
+    handleFilterData(data)
   }
 
   return (
@@ -47,34 +59,35 @@ const SearchBar = ({ handleFilterData, data }: SearchBarProps) => {
         <SearchInput
           placeholder={searchBar.placeholder}
           onChange={handleSearch}
+          onKeyDown={handleKeyDown}
           value={searchText}
         />
         <StyledSearchIcon src={searchIcon} />
       </SearchContainer>
       <PIIContainer>
-        <CheckBox handleClick={setWithPii} />
+        <CheckBox
+          handleClick={setWithPii}
+          checked={withPii}
+        />
         <Text
           label={searchBar.pii}
           fontSize={FontSizes.MEDIUM}
           fontWeight="400"
           color="#a1a0a3"
-          fontFamily="Inter"
         />
       </PIIContainer>
       <ButtonsContainer>
-        <ApplyFilters>
+        <ApplyFilters onClick={filterData}>
           <Text
             label={searchBar.applyLabel}
-            fontFamily="Inter"
             color="#F5F5F5"
             fontSize={FontSizes.MEDIUM}
             fontWeight="600"
           />
         </ApplyFilters>
-        <ResetFilters>
+        <ResetFilters onClick={clearFilters}>
           <Text
             label={searchBar.restetLabel}
-            fontFamily="Inter"
             color="#D5D4D8"
             fontSize={FontSizes.MEDIUM}
             fontWeight="600"
@@ -86,7 +99,7 @@ const SearchBar = ({ handleFilterData, data }: SearchBarProps) => {
 }
 
 const areEqual = (prevProp: SearchBarProps, nextProp: SearchBarProps) => {
-  return handleDeepComparison('', '')
+  return handleDeepComparison(prevProp.data, nextProp.data)
 }
 
 export default memo(SearchBar, areEqual)
