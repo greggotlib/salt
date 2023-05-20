@@ -6,10 +6,14 @@ export const dictionary = {
     restetLabel: 'Reset Filters',
   },
   table: {
-    urlParams: 'URL Parameters',
-    queryParams: 'Query Parameters',
-    headers: 'Headers',
-    body: 'Body',
+    urlParamsRow: 'URL Parameters',
+    queryParamsRow: 'Query Parameters',
+    headersRow: 'Headers',
+    bodyRow: 'Body',
+    queryParams: 'queryParams',
+    urlParams: 'urlParams',
+    headers: 'headers',
+    body: 'body',
     PII: 'PII',
     masked: 'Masked',
     masking: 'Masking',
@@ -19,5 +23,8 @@ export const dictionary = {
   general: {
     request: 'request',
     response: 'response',
+  },
+  header: {
+    allApis: 'ALL APIs',
   },
 }

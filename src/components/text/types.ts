@@ -1,5 +1,7 @@
+import { ReactNode } from 'react'
+
 export interface TextProps {
-  label: string
+  children: ReactNode
   color?: string
   fontFamily?: string
   fontWeight?: string

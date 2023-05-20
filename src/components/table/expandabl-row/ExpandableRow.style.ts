@@ -7,8 +7,6 @@ export const TableCell = styled.td`
 export const ExpandButton = styled.button`
   background-color: transparent;
   border: none;
-  cursor: pointer;
-  margin-inline-start: 46.5px;
 `
 
 export const ExpandCell = styled.td`
@@ -16,4 +14,14 @@ export const ExpandCell = styled.td`
   padding: 0px 15.5px;
 `
 
-export const ExpandedIcon = styled.img``
+export const ExpandedIcon = styled.img`
+  margin: 0;
+  padding: 0 46.5px 0 15.5px;
+`
+export const NonExpandedIcon = styled.img`
+  margin: 0;
+  padding: 0 50px 0 20px;
+`
+export const EmptyIcon = styled.div`
+  padding: 0 58px 0 20px;
+`

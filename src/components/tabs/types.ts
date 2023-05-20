@@ -1,7 +1,5 @@
-export const initialData = {
-  api: '',
-  method: '',
-  path: '',
-  request: { urlParams: [], queryParams: [], headers: [], body: [] },
-  response: { headers: [], body: [] },
+import { Data } from 'components/table/types'
+
+export interface TabsProps {
+  fetchedData: Data
 }

@@ -1,21 +1,17 @@
 import { Text } from 'components/text'
 import styled from 'styled-components'
+import { ChipStyleProps } from './types'
 
-export const ChipContainer = styled.button<{
-  color: string
-  backgroundColor: string
-  withBorder: boolean
-  clickable: boolean
-}>`
+export const ChipContainer = styled.button<ChipStyleProps>`
   display: inline-flex;
   align-items: center;
   padding: 0px 10px;
-  background-color: ${({ backgroundColor }) => backgroundColor};
+  background-color: ${({ backgroundcolor }) => backgroundcolor};
   border-radius: 6px;
-  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
+  cursor: ${({ clickable }) => (clickable === 'true' ? 'pointer' : 'default')};
   height: 25px;
-  border: ${({ withBorder, color }) =>
-    withBorder ? `1px solid ${color}` : 'none'};
+  border: ${({ border, color }) =>
+    border === 'true' ? `1px solid ${color}` : 'none'};
 `
 
 export const ChipText = styled(Text)`

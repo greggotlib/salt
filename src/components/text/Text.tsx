@@ -2,12 +2,12 @@ import { FontSizes, TextProps, Transform } from './types'
 import { Container, StyledText } from './Text.style'
 
 const Text = ({
-  label,
   fontWeight,
   color = '#3D3D3D',
   fontFamily = 'Inter',
   transform = Transform.NONE,
   fontSize = FontSizes.SMALL,
+  children,
 }: TextProps) => {
   return (
     <Container>
@@ -18,7 +18,7 @@ const Text = ({
         color={color}
         family={fontFamily}
       >
-        {label}
+        {children}
       </StyledText>
     </Container>
   )

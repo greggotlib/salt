@@ -13,6 +13,7 @@ import { dictionary } from 'utils/dictionary'
 
 const Table = ({ data, updateByPiiOrMasked }: TableProps) => {
   const { table } = dictionary
+
   return (
     <TableContainer>
       <TableHeader>
@@ -22,49 +23,49 @@ const Table = ({ data, updateByPiiOrMasked }: TableProps) => {
           <TableHeaderCell style={{ width: '240px' }}></TableHeaderCell>
           <TableHeaderCell style={{ width: '300px' }}>
             <Text
-              label={table.name}
               fontSize={FontSizes.MEDIUM}
               fontWeight="600"
-            />
+            >
+              {table.name}
+            </Text>
           </TableHeaderCell>
           <TableHeaderCell style={{ width: '220px' }}>
             <Text
-              label={table.PII}
               fontSize={FontSizes.MEDIUM}
               fontWeight="600"
-            />
+            >
+              {table.PII}
+            </Text>
           </TableHeaderCell>
 
           <TableHeaderCell style={{ width: '255px' }}>
             <Text
-              label={table.masking}
               fontSize={FontSizes.MEDIUM}
               fontWeight="600"
-            />
+            >
+              {table.masking}
+            </Text>
           </TableHeaderCell>
 
           <TableHeaderCell style={{ width: '250px' }}>
             <Text
-              label={table.type}
               fontSize={FontSizes.MEDIUM}
               fontWeight="600"
-            />
+            >
+              {table.type}
+            </Text>
           </TableHeaderCell>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {Object.entries(data).map(([key, value]) =>
-          value.length ? (
-            <ExpandableRow
-              key={key}
-              mainField={key}
-              data={value}
-              updateByPiiOrMasked={updateByPiiOrMasked}
-            />
-          ) : (
-            <></>
-          )
-        )}
+        {Object.entries(data).map(([key, value]) => (
+          <ExpandableRow
+            key={key}
+            mainField={key}
+            data={value}
+            updateByPiiOrMasked={updateByPiiOrMasked}
+          />
+        ))}
       </TableBody>
     </TableContainer>
   )

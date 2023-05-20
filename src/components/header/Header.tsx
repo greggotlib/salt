@@ -1,29 +1,68 @@
-import { Text } from 'components/text'
 import { FontSizes, Transform } from 'components/text/types'
-import { useState } from 'react'
-import data from 'api/data.json'
-import { Container, Icon, IconContainer } from './Header.style'
-import vectorLeft from 'assets/icons/vector.svg'
+import {
+  Container,
+  Icon,
+  Sub,
+  Main,
+  SubIconContainer,
+  MainIconContainer,
+  TextWrapper,
+  MethodWrapper,
+} from './Header.style'
+import arrowLeft from 'assets/icons/arrow-left.svg'
+import arrowRight from 'assets/icons/arrow-right.svg'
+import { HeaderProps } from './types'
+import { dictionary } from 'utils/dictionary'
+import { Text } from 'components/text'
 
-const Header = () => {
-  const [apiData] = useState(data)
+const Header = ({ api, method, path }: HeaderProps) => {
+  const { header } = dictionary
 
   return (
-    <Container>
-      <IconContainer>
-        <Icon src={vectorLeft} />
-      </IconContainer>
-      <Text
-        label={apiData.method}
-        fontSize={FontSizes.LARGE}
-        fontWeight="700"
-        transform={Transform.UPPERCASE}
-      />
-      <Text
-        label={apiData.path}
-        fontSize={FontSizes.LARGE}
-        fontWeight="700"
-      />
+    <Container data-testid="header">
+      <MainIconContainer>
+        <Icon src={arrowLeft} />
+      </MainIconContainer>
+      <TextWrapper>
+        <Main>
+          <MethodWrapper>
+            <Text
+              fontSize={FontSizes.LARGE}
+              fontWeight="700"
+              transform={Transform.UPPERCASE}
+            >
+              {method}
+            </Text>
+          </MethodWrapper>
+          <Text
+            fontSize={FontSizes.LARGE}
+            fontWeight="700"
+          >
+            {path}
+          </Text>
+        </Main>
+        <Sub>
+          <Text
+            fontWeight="600"
+            color="#7D3CE9"
+          >
+            {header.allApis}
+          </Text>
+          <SubIconContainer>
+            <Icon src={arrowRight} />
+          </SubIconContainer>
+          <Text
+            fontWeight="600"
+            color="#7D3CE9"
+          >
+            {api}
+          </Text>
+          <SubIconContainer>
+            <Icon src={arrowRight} />
+          </SubIconContainer>
+          <Text>{path}</Text>
+        </Sub>
+      </TextWrapper>
     </Container>
   )
 }

@@ -1,11 +1,10 @@
-import Tabs from '@mui/material/Tabs'
-import fetchedData from 'api/data.json'
 import { useEffect, useState } from 'react'
 import {
   Container,
   Content,
   SearchBarContainer,
   StyledTab,
+  StyledTabs,
   TabsContainer,
 } from './Tabs.style'
 import { SearchBar } from 'components/search-bar'
@@ -13,13 +12,13 @@ import { Table } from 'components/table'
 import { Data } from 'components/table/types'
 import { updateDataDynamically } from 'utils/helpers'
 import TabPanel from './tab-panel/TablPanel'
-import { initialData } from './types'
+import { TabsProps } from './types'
 import { dictionary } from 'utils/dictionary'
 
-function BasicTabs() {
+function BasicTabs({ fetchedData }: TabsProps) {
   const [value, setValue] = useState(0)
-  const [data, setData] = useState<Data>(initialData)
-  const [filteredData, setFilteredData] = useState<Data>(initialData)
+  const [data, setData] = useState<Data>(fetchedData)
+  const [filteredData, setFilteredData] = useState<Data>(fetchedData)
   const { general } = dictionary
 
   useEffect(() => {
@@ -31,31 +30,58 @@ function BasicTabs() {
     setValue(newValue)
   }
 
+  const getDataTypeByCurrentTab = () => {
+    if (value === 0) {
+      return {
+        filterData: filteredData.request,
+        regData: data.request,
+        dataKey: general.request,
+      }
+    }
+    return {
+      filterData: filteredData.response,
+      regData: data.response,
+      dataKey: general.response,
+    }
+  }
+
   const handleUpdateByPiiOrMasked = (
     parentField: string,
     fieldName: string,
     propery: string,
     newValue: boolean
   ) => {
-    const dataType = value === 0 ? data.request : data.response
-    const dataKey = value === 0 ? general.request : general.response
+    const { filterData, regData, dataKey } = getDataTypeByCurrentTab()
 
-    const updatedData = updateDataDynamically(
-      dataType,
+    const updatedRegData = updateDataDynamically(
+      regData,
       parentField,
       fieldName,
       propery,
       newValue
     )
-    const temp = { ...data, [dataKey]: { ...updatedData } }
-    setData(temp)
-    setFilteredData(temp)
+
+    const updatedFilterData = updateDataDynamically(
+      filterData,
+      parentField,
+      fieldName,
+      propery,
+      newValue
+    )
+
+    const newData = { ...data, [dataKey]: { ...updatedRegData } }
+    const newFilteredData = {
+      ...filteredData,
+      [dataKey]: { ...updatedFilterData },
+    }
+    setData(newData)
+    setFilteredData(newFilteredData)
   }
 
   return (
-    <Container>
+    <Container data-testid="tabs">
       <TabsContainer>
-        <Tabs
+        <StyledTabs
           TabIndicatorProps={{
             style: { background: '#7d3ce9', width: '96px', height: '1px' },
           }}
@@ -64,7 +90,7 @@ function BasicTabs() {
         >
           <StyledTab label={general.request} />
           <StyledTab label={general.response} />
-        </Tabs>
+        </StyledTabs>
       </TabsContainer>
       <Content>
         <SearchBarContainer>

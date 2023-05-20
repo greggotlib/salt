@@ -16,7 +16,7 @@ import { dictionary } from 'utils/dictionary'
 import searchIcon from 'assets/icons/search-icon.svg'
 import { FontSizes } from 'components/text/types'
 import { Text } from 'components/text'
-import { CheckBox } from 'components/check-box'
+import { Checkbox } from 'components/checkbox'
 import { Data } from 'components/table/types'
 
 const SearchBar = ({ handleFilterData, data }: SearchBarProps) => {
@@ -65,33 +65,36 @@ const SearchBar = ({ handleFilterData, data }: SearchBarProps) => {
         <StyledSearchIcon src={searchIcon} />
       </SearchContainer>
       <PIIContainer>
-        <CheckBox
+        <Checkbox
           handleClick={setWithPii}
           checked={withPii}
         />
         <Text
-          label={searchBar.pii}
           fontSize={FontSizes.MEDIUM}
           fontWeight="400"
           color="#a1a0a3"
-        />
+        >
+          {searchBar.pii}
+        </Text>
       </PIIContainer>
       <ButtonsContainer>
         <ApplyFilters onClick={filterData}>
           <Text
-            label={searchBar.applyLabel}
             color="#F5F5F5"
             fontSize={FontSizes.MEDIUM}
             fontWeight="600"
-          />
+          >
+            {searchBar.applyLabel}
+          </Text>
         </ApplyFilters>
         <ResetFilters onClick={clearFilters}>
           <Text
-            label={searchBar.restetLabel}
             color="#D5D4D8"
             fontSize={FontSizes.MEDIUM}
             fontWeight="600"
-          />
+          >
+            {searchBar.restetLabel}
+          </Text>
         </ResetFilters>
       </ButtonsContainer>
     </Wrapper>

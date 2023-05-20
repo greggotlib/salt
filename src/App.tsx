@@ -1,10 +1,14 @@
-import { Dashboard } from 'components/dashboard'
+import { Header } from 'components/header'
+import { Tabs } from 'components/tabs'
+import data from 'api/data.json'
+import { Container } from 'App.style'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Dashboard />
-    </div>
+    <Container data-testid="app">
+      <Header {...data} />
+      <Tabs fetchedData={data} />
+    </Container>
   )
 }
 

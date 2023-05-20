@@ -1,4 +1,4 @@
-import { Container, StyledCheckBox } from './CheckBout.style'
+import { Container, StyledCheckBox } from './Checkbox.style'
 import { CheckBoxProps } from './types'
 
 const Checkbox = ({ handleClick, checked }: CheckBoxProps) => {

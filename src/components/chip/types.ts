@@ -3,10 +3,10 @@ export interface ChipProps {
   parentField: string
   childField: string
   property: string
-  color?: string
-  backgroundColor?: string
-  withBorder?: boolean
-  clickable?: boolean
+  color: string
+  backgroundColor: string
+  withBorder: boolean
+  clickable: boolean
   isSelected?: boolean
   updateByPiiOrMasked?: (
     arg0: string,
@@ -14,4 +14,10 @@ export interface ChipProps {
     arg2: string,
     arg3: boolean
   ) => void
+}
+export interface ChipStyleProps {
+  color: string
+  backgroundcolor: string
+  border: string
+  clickable: string
 }

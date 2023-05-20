@@ -2,7 +2,13 @@ import { useState } from 'react'
 import { ExpandableRowProps } from './type'
 import { Chip } from 'components/chip'
 import { TableCell, TableCellWrapper, TableRow } from '../Table.style'
-import { ExpandButton, ExpandCell, ExpandedIcon } from './ExpandableRow.style'
+import {
+  EmptyIcon,
+  ExpandButton,
+  ExpandCell,
+  ExpandedIcon,
+  NonExpandedIcon,
+} from './ExpandableRow.style'
 import arrowDown from 'assets/icons/arrow-down.svg'
 import arrowUp from 'assets/icons/arrow-up.svg'
 import { Text } from 'components/text'
@@ -18,22 +24,35 @@ const ExpandableRow = ({
   const { table } = dictionary
 
   const toggleExpand = () => {
-    setExpanded(!expanded)
+    if (data.length) {
+      setExpanded(!expanded)
+    }
   }
 
   const getNameByKey = () => {
     switch (mainField) {
-      case 'urlParams':
-        return table.urlParams
-      case 'queryParams':
-        return table.queryParams
-      case 'body':
-        return table.body
-      case 'headers':
-        return table.headers
+      case table.urlParams:
+        return table.urlParamsRow
+      case table.queryParams:
+        return table.queryParamsRow
+      case table.body:
+        return table.bodyRow
+      case table.headers:
+        return table.headersRow
       default:
         return ''
     }
+  }
+
+  const getExpandableIcon = () => {
+    if (data.length) {
+      return expanded ? (
+        <ExpandedIcon src={arrowDown} />
+      ) : (
+        <NonExpandedIcon src={arrowUp} />
+      )
+    }
+    return <EmptyIcon />
   }
 
   return (
@@ -42,12 +61,14 @@ const ExpandableRow = ({
         <TableCell
           onClick={toggleExpand}
           colSpan={6}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: `${data.length ? 'pointer' : 'default'}` }}
         >
           <TableCellWrapper>
-            <ExpandedIcon src={expanded ? arrowDown : arrowUp} />
-            <ExpandButton>
-              <Text label={getNameByKey()} />
+            {getExpandableIcon()}
+            <ExpandButton
+              style={{ cursor: `${data.length ? 'pointer' : 'default'}` }}
+            >
+              <Text>{getNameByKey()}</Text>
             </ExpandButton>
           </TableCellWrapper>
         </TableCell>
@@ -58,10 +79,7 @@ const ExpandableRow = ({
             <ExpandCell></ExpandCell>
             <ExpandCell></ExpandCell>
             <ExpandCell>
-              <Text
-                label={field.name}
-                fontSize={FontSizes.MEDIUM}
-              />
+              <Text fontSize={FontSizes.MEDIUM}>{field.name}</Text>
             </ExpandCell>
             <ExpandCell>
               <Chip
@@ -73,6 +91,8 @@ const ExpandableRow = ({
                 isSelected={field.pii}
                 color="#7D3CE9"
                 withBorder
+                backgroundColor={'#FFFFFF'}
+                clickable={true}
               />
             </ExpandCell>
             <ExpandCell>
@@ -85,6 +105,8 @@ const ExpandableRow = ({
                 isSelected={field.masked}
                 color="#5D94A0"
                 withBorder
+                backgroundColor={'#FFFFFF'}
+                clickable={true}
               />
             </ExpandCell>
             <ExpandCell>
@@ -96,6 +118,7 @@ const ExpandableRow = ({
                 backgroundColor="#CCF3FC"
                 color="#0F3899"
                 clickable={false}
+                withBorder={false}
               />
             </ExpandCell>
           </TableRow>

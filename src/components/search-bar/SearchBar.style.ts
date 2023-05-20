@@ -67,7 +67,7 @@ export const ResetFilters = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px 15px;
+  margin-block-end: 5px;
   gap: 10px;
   width: 118px;
   height: 35px;
@@ -78,5 +78,4 @@ export const ResetFilters = styled.button`
 
 export const ButtonsContainer = styled.div`
   margin-inline-start: 10px;
-  gap: 10px;
 `
