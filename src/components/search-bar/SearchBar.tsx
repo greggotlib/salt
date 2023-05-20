@@ -57,6 +57,7 @@ const SearchBar = ({ handleFilterData, data }: SearchBarProps) => {
     <Wrapper>
       <SearchContainer>
         <SearchInput
+          data-testid="search-bar"
           placeholder={searchBar.placeholder}
           onChange={handleSearch}
           onKeyDown={handleKeyDown}

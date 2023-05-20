@@ -9,6 +9,7 @@ const Checkbox = ({ handleClick, checked }: CheckBoxProps) => {
   return (
     <Container>
       <StyledCheckBox
+        data-testid="show-pii-only"
         type="checkbox"
         checked={checked}
         onChange={handleCheckboxChange}

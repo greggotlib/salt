@@ -12,6 +12,7 @@ const Text = ({
   return (
     <Container>
       <StyledText
+        data-testid="text"
         size={fontSize}
         transform={transform}
         weight={fontWeight}

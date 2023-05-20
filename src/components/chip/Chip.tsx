@@ -37,6 +37,7 @@ const Chip = ({
 
   return (
     <ChipContainer
+      data-testid="chip-container"
       onClick={handleClick}
       {...chipStyleProps}
       disabled={!clickable}
