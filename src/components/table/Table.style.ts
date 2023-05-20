@@ -2,18 +2,48 @@ import styled from 'styled-components'
 
 export const TableContainer = styled.table`
   background: #ffffff;
+  border-collapse: separate;
+  border-spacing: 0;
   width: 100%;
-  border: 1px solid #ded8e8;
   border-radius: 6px;
-  border-collapse: collapse;
+
+  tr td:last-child {
+    border-right: 1px solid #ded8e8;
+    padding: 5px;
+  }
+
+  tr td {
+    border-bottom: 1px solid #ded8e8;
+    padding: 5px;
+  }
+
+  tr th:first-child,
+  tr td:first-child {
+    border-left: 1px solid #ded8e8;
+  }
+  tr th {
+    border-top: solid 1px #ded8e8;
+  }
+  tr:first-child th:first-child {
+    border-top-left-radius: 6px;
+  }
+  tr:first-child th:last-child {
+    border-top-right-radius: 6px;
+    border-right: 1px solid #ded8e8;
+  }
+  tr:last-child td:first-child {
+    border-bottom-left-radius: 6px;
+  }
+  tr:last-child td:last-child {
+    border-bottom-right-radius: 6px;
+  }
 `
 
 export const TableHeader = styled.thead`
   box-sizing: border-box;
   height: 50px;
   background: #ffffff;
-  border-bottom: 1px solid #ededed;
-  border-radius: 6px 6px 0px 0px;
+
   th {
     position: relative;
 
@@ -33,7 +63,9 @@ export const TableHeader = styled.thead`
   }
 `
 
-export const TableHeaderCell = styled.th``
+export const TableHeaderCell = styled.th`
+  border-bottom: 1px solid #ded8e8;
+`
 
 export const TableBody = styled.tbody``
 
@@ -42,7 +74,6 @@ export const TableRow = styled.tr`
 
   gap: 10px;
   background: #ffffff;
-  border-bottom: 1px solid #ded8e8;
   height: 50px;
 `
 
