@@ -10,8 +10,7 @@ export const ExpandButton = styled.button`
 `
 
 export const ExpandCell = styled.td`
-  text-align: center;
-  padding: 0px 15.5px;
+  padding-left: 61px;
 `
 
 export const ExpandedIcon = styled.img`

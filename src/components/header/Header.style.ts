@@ -24,6 +24,7 @@ export const Sub = styled.div`
 
 export const SubIconContainer = styled.div`
   padding: 0 13.5px 0 15.5px;
+  display: flex;
 `
 export const TextWrapper = styled.div``
 

@@ -24,9 +24,7 @@ const ExpandableRow = ({
   const { table } = dictionary
 
   const toggleExpand = () => {
-    if (data.length) {
-      setExpanded(!expanded)
-    }
+    setExpanded(!expanded)
   }
 
   const getNameByKey = () => {

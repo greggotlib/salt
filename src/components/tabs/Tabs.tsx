@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {
   Container,
   Content,
@@ -20,11 +20,6 @@ function BasicTabs({ fetchedData }: TabsProps) {
   const [data, setData] = useState<Data>(fetchedData)
   const [filteredData, setFilteredData] = useState<Data>(fetchedData)
   const { general } = dictionary
-
-  useEffect(() => {
-    setData(fetchedData)
-    setFilteredData(fetchedData)
-  }, [])
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)

@@ -19,7 +19,6 @@ const Table = ({ data, updateByPiiOrMasked }: TableProps) => {
       <TableHeader>
         <TableRow>
           <TableHeaderCell style={{ width: '95px' }}></TableHeaderCell>
-
           <TableHeaderCell style={{ width: '240px' }}></TableHeaderCell>
           <TableHeaderCell style={{ width: '300px' }}>
             <Text
@@ -37,7 +36,6 @@ const Table = ({ data, updateByPiiOrMasked }: TableProps) => {
               {table.PII}
             </Text>
           </TableHeaderCell>
-
           <TableHeaderCell style={{ width: '255px' }}>
             <Text
               fontSize={FontSizes.MEDIUM}
@@ -46,7 +44,6 @@ const Table = ({ data, updateByPiiOrMasked }: TableProps) => {
               {table.masking}
             </Text>
           </TableHeaderCell>
-
           <TableHeaderCell style={{ width: '250px' }}>
             <Text
               fontSize={FontSizes.MEDIUM}
@@ -58,14 +55,17 @@ const Table = ({ data, updateByPiiOrMasked }: TableProps) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {Object.entries(data).map(([key, value]) => (
-          <ExpandableRow
-            key={key}
-            mainField={key}
-            data={value}
-            updateByPiiOrMasked={updateByPiiOrMasked}
-          />
-        ))}
+        {Object.entries(data).map(
+          ([key, value]) =>
+            value.length > 0 && (
+              <ExpandableRow
+                key={key}
+                mainField={key}
+                data={value}
+                updateByPiiOrMasked={updateByPiiOrMasked}
+              />
+            )
+        )}
       </TableBody>
     </TableContainer>
   )

@@ -34,6 +34,9 @@ export const TableHeader = styled.thead`
 
 export const TableHeaderCell = styled.th`
   border-bottom: 1px solid #ded8e8;
+  text-align: left;
+  padding-left: 61px;
+
   &:first-child {
     border-top-left-radius: 6px;
   }
@@ -71,20 +74,20 @@ export const TableRow = styled.tr`
 
   td:last-child {
     border-right: 1px solid #ded8e8;
-    padding: 5px;
   }
 
   td {
     border-bottom: 1px solid #ded8e8;
-    padding: 5px;
   }
 
   td:last-child {
     border-right: 1px solid #ded8e8;
-    padding: 5px;
   }
 
-  th:first-child,
+  th:first-child {
+    border-left: 1px solid #ded8e8;
+    padding: 0;
+  }
   td:first-child {
     border-left: 1px solid #ded8e8;
   }
@@ -94,9 +97,7 @@ export const TableRow = styled.tr`
   }
 `
 
-export const TableCell = styled.td`
-  padding: 0px 15.5px;
-`
+export const TableCell = styled.td``
 
 export const ExpandedRow = styled.tr`
   background-color: #e5f3ff;
