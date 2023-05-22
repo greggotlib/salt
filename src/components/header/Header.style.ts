@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   background: #ffffff;
   border: 1px solid #ded8e8;
-  padding: 15px 0 18px 30.5px;
+  padding: 15px 0 20px 30.5px;
 `
 
 export const IconContainer = styled.div`

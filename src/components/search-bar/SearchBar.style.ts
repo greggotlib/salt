@@ -52,7 +52,6 @@ export const ApplyFilters = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px 15px;
   gap: 10px;
   width: 118px;
   height: 35px;

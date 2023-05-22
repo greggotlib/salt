@@ -16,6 +16,7 @@ export const StyledTabs = styled(Tabs)`
 export const Container = styled.div``
 
 export const StyledTab = styled(Tab)`
+  margin-inline-end: 10px;
   &.MuiTab-root {
     font-size: 14px;
     line-height: 21px;
